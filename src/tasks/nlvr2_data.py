@@ -36,7 +36,7 @@ class NLVR2Dataset:
         # Loading datasets to data
         self.data = []
         for split in self.splits:
-            self.data.extend(json.load(open("data/nlvr2/%s.json" % split)))
+            self.data.extend(json.load(open("/home/ubuntu/filestore/keshav/nlvr2_data/%s.json" % split)))
         print("Load %d data from split(s) %s." % (len(self.data), self.name))
 
         # List to dict (for evaluation and others)
@@ -70,11 +70,11 @@ class NLVR2TorchDataset(Dataset):
         # Loading detection features to img_data
         img_data = []
         if 'train' in dataset.splits:
-            img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/train_obj36.tsv', topk=topk))
-        if 'valid' in dataset.splits:
-            img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/valid_obj36.tsv', topk=topk))
-        if 'test' in dataset.name:
-            img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/test_obj36.tsv', topk=topk))
+            img_data.extend(load_obj_tsv('/home/ubuntu/filestore/keshav/nlvr2_data/train_obj36.tsv', topk=topk))
+        # if 'valid' in dataset.splits:
+        #     img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/valid_obj36.tsv', topk=topk))
+        # if 'test' in dataset.name:
+        #     img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/test_obj36.tsv', topk=topk))
         self.imgid2img = {}
         for img_datum in img_data:
             self.imgid2img[img_datum['img_id']] = img_datum
@@ -154,4 +154,3 @@ class NLVR2Evaluator:
                 idt = self.dataset.id2datum[uid]["identifier"]
                 ans = 'True' if ans == 1 else 'False'
                 f.write("%s,%s\n" % (idt, ans))
-

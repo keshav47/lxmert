@@ -7,7 +7,7 @@ BUTD_ROOT = '/opt/butd/'
 SPLIT2DIR = {
         'train': 'train',
         'valid': 'dev',
-        'test': 'test1',
+        'test': 'test',
         'hidden': 'test2',  # Please correct whether it is test2
         }
 
@@ -183,7 +183,7 @@ if __name__ == '__main__':
     args.cfg_file = BUTD_ROOT + "experiments/cfgs/faster_rcnn_end2end_resnet.yml" # s = 500
     args.prototxt = BUTD_ROOT + "models/vg/ResNet-101/faster_rcnn_end2end_final/test.prototxt"
     args.outfile = "%s_obj36.tsv" % args.split
-    
+
     print('Called with args:')
     print(args)
 
@@ -195,7 +195,7 @@ if __name__ == '__main__':
     assert cfg.TEST.HAS_RPN
 
     # Load image ids, need modification for new datasets.
-    image_ids = load_image_ids(args.imgroot, SPLIT2DIR[args.split])  
-    
+    image_ids = load_image_ids(args.imgroot, SPLIT2DIR[args.split])
+
     # Generate TSV files, noramlly do not need to modify
     generate_tsv(args.prototxt, args.caffemodel, image_ids, args.outfile)
