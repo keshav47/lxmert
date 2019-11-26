@@ -132,6 +132,7 @@ class NLVR2Evaluator:
 
     def evaluate(self, quesid2ans: dict):
         score = 0.
+        print("==========>",len(quesid2ans))
         for quesid, ans in quesid2ans.items():
             datum = self.dataset.id2datum[quesid]
             label = datum['label']
