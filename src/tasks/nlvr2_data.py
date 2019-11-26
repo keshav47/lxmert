@@ -71,8 +71,8 @@ class NLVR2TorchDataset(Dataset):
         img_data = []
         if 'train' in dataset.splits:
             img_data.extend(load_obj_tsv('/home/ubuntu/filestore/keshav/nlvr2_data/train_obj36.tsv', topk=topk))
-        # if 'valid' in dataset.splits:
-        #     img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/valid_obj36.tsv', topk=topk))
+        if 'valid' in dataset.splits:
+            img_data.extend(load_obj_tsv('/home/ubuntu/filestore/keshav/nlvr2_data/train_obj36.tsv', topk=topk))
         # if 'test' in dataset.name:
         #     img_data.extend(load_obj_tsv('data/nlvr2_imgfeat/test_obj36.tsv', topk=topk))
         self.imgid2img = {}
