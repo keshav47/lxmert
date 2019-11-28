@@ -42,7 +42,7 @@ def load_obj_tsv(fname, topk=None):
                 ('features', (boxes, -1), np.float32),
             ]
             for key, shape, dtype in decode_config:
-                item[key] = np.frombuffer(base64.b64decode(base64.b64encode(item[key])), dtype=dtype)
+                item[key] = np.frombuffer(base64.b64decode(item[key]+"===="), dtype=dtype)
                 item[key] = item[key].reshape(shape)
                 item[key].setflags(write=False)
 
