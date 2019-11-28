@@ -31,7 +31,7 @@ def load_obj_tsv(fname, topk=None):
 
             for key in ['img_h', 'img_w', 'num_boxes']:
                 item[key] = int(item[key])
-            
+
             boxes = item['num_boxes']
             decode_config = [
                 ('objects_id', (boxes, ), np.int64),
@@ -42,7 +42,7 @@ def load_obj_tsv(fname, topk=None):
                 ('features', (boxes, -1), np.float32),
             ]
             for key, shape, dtype in decode_config:
-                item[key] = np.frombuffer(base64.b64decode(item[key]), dtype=dtype)
+                item[key] = np.frombuffer(base64.b64decode(base64.b64encode(item[key])), dtype=dtype)
                 item[key] = item[key].reshape(shape)
                 item[key].setflags(write=False)
 
@@ -52,4 +52,3 @@ def load_obj_tsv(fname, topk=None):
     elapsed_time = time.time() - start_time
     print("Loaded %d images in file %s in %d seconds." % (len(data), fname, elapsed_time))
     return data
-
