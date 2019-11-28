@@ -36,7 +36,7 @@ class NLVR2Dataset:
         # Loading datasets to data
         self.data = []
         for split in self.splits:
-            self.data.extend(json.load(open("/home/ubuntu/filestore/keshav/nlvr2_data/%s.json" % split)))
+            self.data.extend(json.load(open("/home/ubuntu/filestore/product_matching/data/lxmert/%s.json" % split)))
         print("Load %d data from split(s) %s." % (len(self.data), self.name))
 
         # List to dict (for evaluation and others)
